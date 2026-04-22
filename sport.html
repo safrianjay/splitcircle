@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SplitCircle | PlayO Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafafa; /* neutral-50 */
+            color: #0a0a0a; /* neutral-950 */
+        }
+
+        /* Custom Scrollbar for horizontal lists */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Theme Variables from index.html */
+        :root {
+            --neon-primary: #beff0a;
+            --neon-glow: rgba(190, 255, 10, 0.2); 
+        }
+
+        .neon-shadow {
+            box-shadow: 0 5px 15px -5px var(--neon-glow);
+        }
+
+        .neon-btn {
+            background-color: var(--neon-primary);
+            color: #0a0a0a;
+            transition: all 0.2s ease;
+        }
+        .neon-btn:hover {
+            box-shadow: 0 5px 15px -5px rgba(190, 255, 10, 0.4);
+            background-color: #caff33;
+        }
+
+        /* Light Theme Card Hover */
+        .event-card {
+            transition: all 0.2s ease;
+        }
+        .event-card:hover {
+            border-color: #e5e5e5;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="h-screen overflow-hidden flex selection:bg-[#beff0a] selection:text-neutral-950">
+
+    <aside class="hidden md:flex flex-col w-72 bg-white border-r border-neutral-200 h-full p-6 justify-between z-20">
+        <div>
+            <div class="flex items-center gap-2 mb-12">
+                <h1 class="text-2xl font-bold tracking-tighter text-neutral-950">SplitCircle<span class="text-[#beff0a] text-3xl">.</span></h1>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="#" class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-neutral-500 hover:text-neutral-950 hover:bg-neutral-50 font-medium transition-colors">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="flex items-center gap-4 px-4 py-3.5 rounded-xl neon-btn font-bold">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                    <span>PlayO Courts</span>
+                </a>
+                <a href="#" class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-neutral-500 hover:text-neutral-950 hover:bg-neutral-50 font-medium transition-colors">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    <span>Community</span>
+                </a>
+            </nav>
+        </div>
+        
+        <div class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-neutral-50 border border-neutral-100 cursor-pointer hover:border-neutral-200 transition-colors">
+            <div class="w-10 h-10 rounded-full bg-neutral-200 border-2 border-white shadow-sm overflow-hidden flex items-center justify-center">
+                 <span class="font-bold text-neutral-500 text-sm">S</span>
+            </div>
+            <div>
+                <p class="text-sm font-bold text-neutral-950">Safrian</p>
+                <p class="text-xs text-neutral-500 font-medium">Jakarta Selatan</p>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full relative overflow-hidden bg-neutral-50">
+        
+        <header class="px-4 py-4 md:px-8 md:py-6 border-b border-neutral-200 bg-white/80 backdrop-blur-xl z-10 sticky top-0">
+            <div class="max-w-4xl mx-auto flex justify-between items-center">
+                
+                <div>
+                    <p class="text-xs text-neutral-500 font-bold uppercase tracking-wider mb-0.5">Activities near</p>
+                    <button class="flex items-center gap-2 text-neutral-950 font-extrabold text-xl hover:text-neutral-600 transition-colors">
+                        Your location
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2 md:gap-4">
+                    <button class="p-2.5 text-neutral-600 hover:text-neutral-950 bg-neutral-100 hover:bg-neutral-200 rounded-full transition-colors">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </button>
+                    <button class="p-2.5 text-neutral-600 hover:text-neutral-950 bg-neutral-100 hover:bg-neutral-200 rounded-full transition-colors">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto no-scrollbar pb-24 md:pb-8">
+            <div class="max-w-4xl mx-auto">
+                
+                <div class="sticky top-0 bg-neutral-50/95 backdrop-blur-xl z-10 pt-6 pb-2 px-4 md:px-8">
+                    
+                    <div class="flex gap-3 overflow-x-auto no-scrollbar mb-5 pb-1">
+                        <button class="whitespace-nowrap px-6 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 neon-btn shadow-sm border border-transparent">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            All
+                        </button>
+                        <button class="whitespace-nowrap px-5 py-2.5 rounded-xl bg-white border border-neutral-200 text-sm font-semibold text-neutral-600 flex items-center gap-2 hover:border-neutral-300 hover:text-neutral-950 shadow-sm transition-colors">
+                            🎾 Tennis
+                        </button>
+                        <button class="whitespace-nowrap px-5 py-2.5 rounded-xl bg-white border border-neutral-200 text-sm font-semibold text-neutral-600 flex items-center gap-2 hover:border-neutral-300 hover:text-neutral-950 shadow-sm transition-colors">
+                            🏸 Padel
+                        </button>
+                        <button class="whitespace-nowrap px-5 py-2.5 rounded-xl bg-white border border-neutral-200 text-sm font-semibold text-neutral-600 flex items-center gap-2 hover:border-neutral-300 hover:text-neutral-950 shadow-sm transition-colors">
+                            🧗 Climbing
+                        </button>
+                        <button class="whitespace-nowrap px-5 py-2.5 rounded-xl bg-white border border-neutral-200 text-sm font-semibold text-neutral-600 flex items-center gap-2 hover:border-neutral-300 hover:text-neutral-950 shadow-sm transition-colors">
+                            ⚾ Softball
+                        </button>
+                    </div>
+
+                    <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+                        <button class="whitespace-nowrap px-4 py-2.5 rounded-lg bg-neutral-950 text-white text-sm font-bold shadow-sm">
+                            Today
+                        </button>
+                        <button class="whitespace-nowrap px-4 py-2.5 rounded-lg bg-transparent text-neutral-500 text-sm font-semibold hover:bg-neutral-200/50 hover:text-neutral-950 transition-colors">
+                            Wed 22
+                        </button>
+                        <button class="whitespace-nowrap px-4 py-2.5 rounded-lg bg-transparent text-neutral-500 text-sm font-semibold hover:bg-neutral-200/50 hover:text-neutral-950 transition-colors">
+                            Thu 23
+                        </button>
+                        <button class="whitespace-nowrap px-4 py-2.5 rounded-lg bg-transparent text-neutral-500 text-sm font-semibold hover:bg-neutral-200/50 hover:text-neutral-950 transition-colors">
+                            Fri 24
+                        </button>
+                        <button class="whitespace-nowrap px-4 py-2.5 rounded-lg bg-transparent text-neutral-500 text-sm font-semibold hover:bg-neutral-200/50 hover:text-neutral-950 transition-colors">
+                            Sat 25
+                        </button>
+                    </div>
+                </div>
+
+                <div class="px-4 md:px-8 py-4 space-y-4">
+                    <h2 class="text-lg font-extrabold text-neutral-950 mb-4 tracking-tight">Tue, 21 Apr 2026</h2>
+
+                    <div class="bg-white border border-neutral-200/70 rounded-3xl p-4 flex gap-4 cursor-pointer event-card">
+                        <div class="w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-neutral-100 flex-shrink-0 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=300&q=80" alt="Yoga Class" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center">
+                            <h3 class="text-base md:text-lg font-bold text-neutral-950 leading-tight mb-1.5">Gentle Flow</h3>
+                            <p class="text-xs md:text-sm text-neutral-500 font-medium mb-3">16:15 - 17:15 WIB • SVASANA Yoga and Wellness</p>
+                            <div class="flex items-center gap-2 mt-auto">
+                                <div class="flex -space-x-2">
+                                    <div class="w-6 h-6 rounded-full bg-emerald-200 border-2 border-white shadow-sm"></div>
+                                    <div class="w-6 h-6 rounded-full bg-neutral-200 border-2 border-white shadow-sm"></div>
+                                </div>
+                                <p class="text-xs text-neutral-500 font-medium">Joined by <span class="text-neutral-950 font-bold">Svasana Yoga</span> and 2 others</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-neutral-200/70 rounded-3xl p-4 flex gap-4 cursor-pointer event-card relative overflow-hidden">
+                        
+                        <div class="w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-neutral-100 flex-shrink-0 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=300&q=80" alt="Tennis Court" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 flex flex-col">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-base md:text-lg font-bold text-neutral-950 leading-tight mb-1.5 pr-4">SELASA SORE Rally Max 2 Player Beginner</h3>
+                                <span class="hidden md:block px-4 py-1.5 bg-neutral-950 text-white rounded-lg text-xs font-bold shadow-sm">Book</span>
+                            </div>
+                            <p class="text-xs md:text-sm text-neutral-500 font-medium mb-3">17:00 - 18:00 WIB • Lapangan Tenis Poris Garden</p>
+                            
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mt-auto gap-3 md:gap-2">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-red-200 border-2 border-white shadow-sm"></div>
+                                    <p class="text-xs text-neutral-500 font-medium">Joined by <span class="text-neutral-950 font-bold">Tennis Colegio</span></p>
+                                </div>
+                                <div class="flex items-center gap-2 bg-[#beff0a] px-3 py-1.5 rounded-lg w-fit">
+                                    <div class="w-2 h-2 rounded-full bg-neutral-950 animate-pulse"></div>
+                                    <p class="text-xs font-bold text-neutral-950">2 Slots remaining</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-neutral-200/70 rounded-3xl p-4 flex gap-4 cursor-pointer event-card">
+                        <div class="w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-neutral-100 flex-shrink-0 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=300&q=80" alt="Tennis Action" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center">
+                            <h3 class="text-base md:text-lg font-bold text-neutral-950 leading-tight mb-1.5 pr-4 line-clamp-1">TENNIS FOR NEWBIE WITH COACH SAM...</h3>
+                            <p class="text-xs md:text-sm text-neutral-500 font-medium mb-3 line-clamp-1">17:00 - 18:30 WIB • Lapangan Tenis Buaran Regen...</p>
+                            
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mt-auto gap-3 md:gap-2">
+                                <div class="flex items-center gap-2">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-6 h-6 rounded-full bg-blue-200 border-2 border-white shadow-sm"></div>
+                                        <div class="w-6 h-6 rounded-full bg-orange-200 border-2 border-white shadow-sm"></div>
+                                    </div>
+                                    <p class="text-xs text-neutral-500 font-medium">Joined by <span class="text-neutral-950 font-bold">SAM HARRY</span> and 1 other</p>
+                                </div>
+                                <div class="flex items-center gap-2 bg-neutral-100 border border-neutral-200 px-3 py-1.5 rounded-lg w-fit">
+                                    <p class="text-xs font-bold text-neutral-700">5 Slots remaining</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-neutral-200/70 rounded-3xl p-4 flex gap-4 cursor-pointer event-card">
+                        
+                        <div class="w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-neutral-100 flex-shrink-0 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=300&q=80" alt="Tennis Balls and Racket" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 flex flex-col">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-base md:text-lg font-bold text-neutral-950 leading-tight mb-1.5">Doubles Games Intermediate</h3>
+                                <span class="hidden md:block px-4 py-1.5 bg-neutral-950 text-white rounded-lg text-xs font-bold shadow-sm">Book</span>
+                            </div>
+                            <p class="text-xs md:text-sm text-neutral-500 font-medium mb-3">17:00 - 19:00 WIB • WELLGROUND</p>
+                            
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mt-auto gap-3 md:gap-2">
+                                <div class="flex items-center gap-2">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-6 h-6 rounded-full bg-green-200 border-2 border-white shadow-sm"></div>
+                                        <div class="w-6 h-6 rounded-full bg-neutral-300 border-2 border-white shadow-sm"></div>
+                                    </div>
+                                    <p class="text-xs text-neutral-500 font-medium">Joined by <span class="text-neutral-950 font-bold">Tennez Benerr</span> and 5 others</p>
+                                </div>
+                                <div class="flex items-center gap-2 bg-[#beff0a] px-3 py-1.5 rounded-lg w-fit">
+                                    <div class="w-2 h-2 rounded-full bg-neutral-950 animate-pulse"></div>
+                                    <p class="text-xs font-bold text-neutral-950">1 Slot remaining</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <button class="fixed md:absolute bottom-24 md:bottom-8 right-6 md:right-8 w-16 h-16 rounded-2xl neon-btn flex items-center justify-center shadow-lg hover:scale-105 transition-transform z-30 border border-white/50">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+
+    </main>
+
+    <nav class="md:hidden fixed bottom-0 w-full bg-white/90 backdrop-blur-xl border-t border-neutral-200 flex justify-around items-center py-4 pb-8 z-40 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
+        <a href="#" class="flex flex-col items-center gap-1 text-neutral-950 relative">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <div class="absolute -bottom-3 w-1.5 h-1.5 bg-[#beff0a] rounded-full"></div>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 text-neutral-400 hover:text-neutral-950 transition-colors">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 text-neutral-400 hover:text-neutral-950 transition-colors">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 text-neutral-400 hover:text-neutral-950 transition-colors">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 text-neutral-400 hover:text-neutral-950 transition-colors">
+            <div class="w-7 h-7 rounded-full bg-neutral-200 border-2 border-white shadow-sm overflow-hidden flex items-center justify-center">
+                 <span class="font-bold text-neutral-500 text-[10px]">S</span>
+            </div>
+        </a>
+    </nav>
+
+</body>
+</html>
