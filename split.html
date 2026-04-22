@@ -80,8 +80,8 @@
 
     <main class="flex-1 flex flex-col bg-neutral-50">
         
-        <header class="px-4 py-4 md:px-8 md:py-6 border-b border-neutral-200 bg-white/80 backdrop-blur-xl z-10 sticky top-0 md:top-[73px]">
-            <div class="max-w-3xl mx-auto flex justify-between items-center">
+        <header class="px-0 py-4 md:py-6 border-b border-neutral-200 bg-white/80 backdrop-blur-xl z-10 sticky top-0 md:top-[73px]">
+            <div class="max-w-3xl mx-auto flex justify-between items-center px-4 md:px-8">
                 <div class="flex items-center gap-4">
                     <div>
                         <h2 class="text-xl font-extrabold text-neutral-950 tracking-tight">Padel Intermediate Social Match</h2>
@@ -103,24 +103,24 @@
         <div class="flex-1 overflow-y-auto no-scrollbar pb-28 md:pb-12 pt-6">
             <div class="max-w-3xl mx-auto px-4 md:px-8 space-y-6">
                 
-                <div class="bg-white border border-neutral-200/70 rounded-3xl p-8 md:p-10 flex flex-col items-center text-center shadow-sm">
-                    <div class="w-full mb-8">
-                        <p class="text-xs font-black text-neutral-400 uppercase tracking-[0.2em] mb-6">Scan to Pay</p>
+                <div class="bg-white border border-neutral-200/70 rounded-3xl p-6 md:p-8 flex flex-col items-center text-center shadow-sm">
+                    <div class="w-full mb-6">
+                        <p class="text-[10px] font-black text-neutral-400 uppercase tracking-[0.2em] mb-4">Scan to Pay</p>
                         
-                        <div class="flex flex-col items-center gap-8">
-                            <!-- Large Centered QR Code -->
+                        <div class="flex flex-col items-center gap-6">
+                            <!-- Compact Centered QR Code -->
                             <div class="relative group">
-                                <div class="absolute -inset-4 bg-[#beff0a]/20 rounded-[2rem] blur-xl group-hover:bg-[#beff0a]/30 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                                <div class="relative p-6 bg-white rounded-[2rem] shadow-[0_20px_50px_-20px_rgba(0,0,0,0.1)] border border-neutral-100">
-                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://splitcircle.app/pay/K8X29P" alt="Payment QR Code" class="w-48 h-48 md:w-56 md:h-56 object-contain">
+                                <div class="absolute -inset-2 bg-[#beff0a]/20 rounded-2xl blur-lg group-hover:bg-[#beff0a]/30 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+                                <div class="relative p-4 bg-white rounded-2xl shadow-[0_15px_35px_-15px_rgba(0,0,0,0.1)] border border-neutral-100">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://splitcircle.app/pay/K8X29P" alt="Payment QR Code" class="w-36 h-36 md:w-40 md:h-40 object-contain">
                                 </div>
                             </div>
                             
-                            <!-- Centered Payment Link Section -->
-                            <div class="w-full max-w-md">
-                                <p class="text-xs font-bold text-neutral-500 mb-3 uppercase tracking-wider">Or use payment link</p>
-                                <div class="flex items-center gap-3 bg-neutral-50 border border-neutral-200 rounded-2xl px-4 py-4 w-full shadow-inner cursor-pointer hover:border-neutral-300 transition-all group/link">
-                                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" class="text-neutral-400 group-hover/link:text-neutral-950 transition-colors" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            <!-- Compact Centered Payment Link Section -->
+                            <div class="w-full max-w-sm">
+                                <p class="text-[11px] font-bold text-neutral-500 mb-2 uppercase tracking-wider">Or use payment link</p>
+                                <div class="flex items-center gap-3 bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3 w-full shadow-inner cursor-pointer hover:border-neutral-300 transition-all group/link">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" class="text-neutral-400 group-hover/link:text-neutral-950 transition-colors" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                                     <span class="text-sm font-bold text-neutral-950 truncate">
                                         splitcircle.app/pay/session/89xK2mP910vL
                                     </span>
@@ -129,13 +129,13 @@
                         </div>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-md border-t border-neutral-100 pt-8">
-                        <button class="w-full py-4 px-6 rounded-2xl neon-btn font-extrabold flex items-center justify-center gap-3 text-sm shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-sm border-t border-neutral-100 pt-6">
+                        <button class="w-full py-3.5 px-6 rounded-xl neon-btn font-extrabold flex items-center justify-center gap-2 text-[13px] shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
                             Share Link
                         </button>
-                        <button class="w-full py-4 px-6 rounded-2xl bg-neutral-950 text-white hover:bg-neutral-800 font-extrabold flex items-center justify-center gap-3 text-sm transition-all hover:scale-[1.02] active:scale-[0.98]">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <button class="w-full py-3.5 px-6 rounded-xl bg-neutral-950 text-white hover:bg-neutral-800 font-extrabold flex items-center justify-center gap-2 text-[13px] transition-all hover:scale-[1.02] active:scale-[0.98]">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                             Copy Link
                         </button>
                     </div>
