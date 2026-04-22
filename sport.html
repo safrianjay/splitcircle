@@ -596,7 +596,7 @@
         </div>
     </main>
 
-    <button class="fixed bottom-24 md:bottom-10 md:right-10 right-6 w-16 h-16 rounded-full md:w-auto md:px-6 md:h-14 md:rounded-full neon-btn flex items-center justify-center gap-3 shadow-lg hover:scale-105 transition-transform z-30 border border-white/50">
+    <button id="fab-button" class="fixed bottom-[95px] md:bottom-10 md:right-10 right-6 w-14 h-14 rounded-full md:w-auto md:px-6 md:h-14 md:rounded-full neon-btn flex items-center justify-center gap-3 shadow-lg hover:scale-105 transition-all duration-300 z-30 border border-white/50">
         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="md:hidden"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         <span class="hidden md:block font-bold text-sm">Show map</span>
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="hidden md:block"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -625,5 +625,27 @@
         <div class="absolute top-full left-0 w-full h-[100px] bg-white"></div>
     </nav>
 
+    <script>
+        // FAB Scroll Effect
+        let lastScrollTop = 0;
+        const fab = document.getElementById('fab-button');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scroll down - hide FAB
+                fab.style.transform = 'scale(0.5) translateY(40px)';
+                fab.style.opacity = '0';
+                fab.style.pointerEvents = 'none';
+            } else {
+                // Scroll up - show FAB
+                fab.style.transform = 'scale(1) translateY(0)';
+                fab.style.opacity = '1';
+                fab.style.pointerEvents = 'auto';
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+    </script>
 </body>
 </html>
