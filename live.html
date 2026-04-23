@@ -63,9 +63,11 @@
                 <div class="w-2.5 h-2.5 rounded-full bg-[#beff0a] pulse-indicator"></div>
                 <h1 class="text-lg font-black text-neutral-950 tracking-tight">LIVE SESSION</h1>
             </div>
-            <div class="bg-neutral-100 px-3 py-1 rounded-full">
-                <span id="timer" class="text-xs font-bold text-neutral-600">00:14:22</span>
-            </div>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-neutral-100 transition-colors">
+                <svg width="20" height="20" fill="currentColor" class="text-neutral-500" viewBox="0 0 16 16">
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                </svg>
+            </button>
         </header>
     </div>
 
@@ -215,7 +217,6 @@
             const secs = String(seconds % 60).padStart(2, '0');
             
             const timeStr = hrs > 0 ? `${hrs}:${mins}:${secs}` : `${mins}:${secs}`;
-            document.getElementById('timer').innerText = hrs > 0 ? `${hrs}:${mins}:${secs}` : `${mins}:${secs}`;
             document.getElementById('timer-display').innerText = timeStr;
         }, 1000);
 
