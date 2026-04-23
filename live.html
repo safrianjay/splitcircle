@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Live Session | SplitCircle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .neon-btn {
+            background-color: #beff0a;
+            color: #000;
+            transition: all 0.3s ease;
+        }
+
+        .neon-btn:hover {
+            background-color: #a8e600;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(190, 255, 10, 0.2);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        #map {
+            height: 350px;
+            width: 100%;
+            border-radius: 24px;
+            z-index: 1;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes pulse-neon {
+            0% { box-shadow: 0 0 0 0 rgba(190, 255, 10, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(190, 255, 10, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(190, 255, 10, 0); }
+        }
+
+        .pulse-indicator {
+            animation: pulse-neon 2s infinite;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <div class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-neutral-200">
+        <header class="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full bg-[#beff0a] pulse-indicator"></div>
+                <h1 class="text-lg font-black text-neutral-950 tracking-tight">LIVE SESSION</h1>
+            </div>
+            <div class="bg-neutral-100 px-3 py-1 rounded-full">
+                <span id="timer" class="text-xs font-bold text-neutral-600">00:14:22</span>
+            </div>
+        </header>
+    </div>
+
+    <main class="flex-1 pt-24 pb-32 px-4 max-w-3xl mx-auto w-full space-y-6">
+        
+        <!-- Live Map Prototype -->
+        <div class="relative">
+            <div id="map" class="shadow-inner border border-neutral-200"></div>
+            <div class="absolute top-4 right-4 z-[2] bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-neutral-200 shadow-sm">
+                <p class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">GPS Signal</p>
+                <div class="flex items-center gap-1">
+                    <div class="w-1 h-3 bg-[#beff0a] rounded-full"></div>
+                    <div class="w-1 h-3 bg-[#beff0a] rounded-full"></div>
+                    <div class="w-1 h-3 bg-[#beff0a] rounded-full"></div>
+                    <div class="w-1 h-1.5 bg-neutral-200 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Stats Grid -->
+        <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white p-5 rounded-[2rem] border border-neutral-200 shadow-sm relative overflow-hidden">
+                <p class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-1">Current Speed</p>
+                <div class="flex items-baseline gap-1">
+                    <h2 class="text-4xl font-black text-neutral-950">12.4</h2>
+                    <span class="text-sm font-bold text-neutral-400 uppercase">km/h</span>
+                </div>
+                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-[#beff0a]/5 rounded-full blur-2xl"></div>
+            </div>
+            
+            <div class="bg-neutral-950 p-5 rounded-[2rem] border border-neutral-800 shadow-sm relative overflow-hidden">
+                <p class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-1">Heart Rate</p>
+                <div class="flex items-baseline gap-1">
+                    <h2 class="text-4xl font-black text-white">142</h2>
+                    <span class="text-sm font-bold text-neutral-500 uppercase">bpm</span>
+                </div>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#beff0a" stroke-width="2.5" class="absolute right-6 top-6 opacity-50"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+        </div>
+
+        <!-- Secondary Stats -->
+        <div class="bg-white p-6 rounded-[2rem] border border-neutral-200 shadow-sm">
+            <div class="grid grid-cols-3 divide-x divide-neutral-100">
+                <div class="text-center pr-2">
+                    <p class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-1">Distance</p>
+                    <p class="text-lg font-black text-neutral-950">2.42 <span class="text-[10px] text-neutral-400">km</span></p>
+                </div>
+                <div class="text-center px-2">
+                    <p class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-1">Cals</p>
+                    <p class="text-lg font-black text-neutral-950">342 <span class="text-[10px] text-neutral-400">kcal</span></p>
+                </div>
+                <div class="text-center pl-2">
+                    <p class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-1">Pace</p>
+                    <p class="text-lg font-black text-neutral-950">4'22" <span class="text-[10px] text-neutral-400">/km</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Activity Graph Placeholder -->
+        <div class="bg-white p-6 rounded-[2rem] border border-neutral-200 shadow-sm relative overflow-hidden">
+            <h3 class="text-sm font-black text-neutral-950 mb-4">Intensity Zone</h3>
+            <div class="flex items-end gap-1.5 h-16 w-full">
+                <div class="flex-1 bg-neutral-100 h-[20%] rounded-t-md"></div>
+                <div class="flex-1 bg-neutral-100 h-[40%] rounded-t-md"></div>
+                <div class="flex-1 bg-neutral-100 h-[30%] rounded-t-md"></div>
+                <div class="flex-1 bg-[#beff0a] h-[80%] rounded-t-md"></div>
+                <div class="flex-1 bg-[#beff0a] h-[90%] rounded-t-md"></div>
+                <div class="flex-1 bg-neutral-100 h-[60%] rounded-t-md"></div>
+                <div class="flex-1 bg-neutral-100 h-[45%] rounded-t-md"></div>
+                <div class="flex-1 bg-neutral-100 h-[30%] rounded-t-md"></div>
+                <div class="flex-1 bg-[#beff0a] h-[70%] rounded-t-md shadow-[0_0_15px_rgba(190,255,10,0.3)]"></div>
+                <div class="flex-1 bg-[#beff0a] h-[85%] rounded-t-md"></div>
+                <div class="flex-1 bg-neutral-100 h-[50%] rounded-t-md"></div>
+                <div class="flex-1 bg-neutral-100 h-[40%] rounded-t-md"></div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="grid grid-cols-2 gap-4">
+            <button class="w-full py-4 rounded-2xl bg-white border border-neutral-200 text-neutral-950 font-bold text-sm shadow-sm hover:bg-neutral-50 transition-colors">
+                Pause
+            </button>
+            <button class="w-full py-4 rounded-2xl neon-btn font-bold text-sm shadow-lg flex items-center justify-center gap-2">
+                Finish Session
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Bottom Navigation (Consistent with app) -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-white/90 backdrop-blur-xl border-t border-neutral-200 flex justify-around items-center py-4 z-40" style="padding-bottom: calc(env(safe-area-inset-bottom) + 16px);">
+        <a href="index.html" class="flex flex-col items-center gap-1 text-neutral-400 hover:text-neutral-950 transition-colors">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </a>
+        <a href="sport.html" class="flex flex-col items-center gap-1 text-neutral-400 hover:text-neutral-950 transition-colors">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </a>
+        <a href="split.html" class="flex flex-col items-center gap-1 text-neutral-400 hover:text-neutral-950 transition-colors">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 text-[#beff0a]">
+            <div class="relative">
+                <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#beff0a] rounded-full"></div>
+            </div>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 text-neutral-400 hover:text-neutral-950 transition-colors">
+            <div class="w-7 h-7 rounded-full bg-neutral-200 border-2 border-white shadow-sm overflow-hidden flex items-center justify-center">
+                 <span class="font-bold text-neutral-500 text-[10px]">S</span>
+            </div>
+        </a>
+        <div class="absolute top-full left-0 w-full h-[100px] bg-white"></div>
+    </nav>
+
+    <script>
+        // Leaflet Map Initialization with stylized dark tiles
+        const map = L.map('map', {
+            zoomControl: false,
+            attributionControl: false
+        }).setView([3.1390, 101.6869], 16); // Kuala Lumpur coordinates
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        // Dummy Track Line
+        const latlngs = [
+            [3.1390, 101.6869],
+            [3.1395, 101.6875],
+            [3.1400, 101.6870],
+            [3.1405, 101.6880]
+        ];
+        
+        const polyline = L.polyline(latlngs, {
+            color: '#beff0a',
+            weight: 5,
+            opacity: 0.8,
+            lineJoin: 'round'
+        }).addTo(map);
+
+        // Current Position Marker
+        const marker = L.circleMarker([3.1405, 101.6880], {
+            radius: 8,
+            fillColor: '#beff0a',
+            color: '#fff',
+            weight: 3,
+            opacity: 1,
+            fillOpacity: 1
+        }).addTo(map);
+
+        map.fitBounds(polyline.getBounds(), { padding: [30, 30] });
+
+        // Simple Timer Logic
+        let seconds = 862; // Starting at 14:22
+        setInterval(() => {
+            seconds++;
+            const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
+            const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+            const secs = String(seconds % 60).padStart(2, '0');
+            document.getElementById('timer').innerText = `${hrs}:${mins}:${secs}`;
+        }, 1000);
+    </script>
+</body>
+</html>
